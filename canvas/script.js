@@ -9,6 +9,9 @@ function Point (x, y, r, g, b, a) {
   this.b = b
   this.a = a
 
+  this.c = 0
+  this.dir = 0
+
   this.index = Point.list.length
   Point.list[this.index] = this
 
@@ -16,13 +19,13 @@ function Point (x, y, r, g, b, a) {
 }
 
 Point.prototype.move  = function () {
-  this.x = this.x + rand (10) - rand (10)
-  this.y = this.y + rand (10) - rand (10)
+  this.x = this.x + rand (2) - rand (10)
+  this.y = this.y + rand (2) - rand (10)
 
-  this.r = rand(255)
-  this.g = rand(255)
-  this.b = rand(255)
-  this.a = rand(255)
+  // this.r = rand(255)
+  // this.g = rand(255)
+  // this.b = rand(255)
+  // this.a = rand(255)
 
   this.draw()
 }
@@ -62,8 +65,8 @@ var c   = document.getElementById("canvas")
   , height = c.height
   , image = ctx.getImageData(0, 0, width, height)
 
-  new Point(width/2, height/2, rand(255), rand(255), rand(255), rand(255))
 setInterval(function() {
+  new Point(width/2, height/2, rand(255), rand(255), rand(255), rand(255))
   Point.list.forEach(function(thiz, i){thiz.move()})
   updateCanvas()
 }, 1)
