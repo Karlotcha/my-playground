@@ -9,8 +9,8 @@ function Point (x, y, r, g, b, a) {
   this.b = b
   this.a = a
 
-  this.c = 0
-  this.dir = 0
+  this.vx = Math.random() - Math.random()
+  this.vy = Math.random() - Math.random()
 
   this.index = Point.list.length
   Point.list[this.index] = this
@@ -19,25 +19,16 @@ function Point (x, y, r, g, b, a) {
 }
 
 Point.prototype.move  = function () {
-  this.c += 1
+  this.x = this.x + this.vx
+  this.y = this.y + this.vy
+  this.a = this.a - 1
 
-  if (this.c == 10) {
-    this.c = 0
-    this.d = rand(3)
-  }
-
-  if (this.d==0)
-    this.x -= 1
-  else if (this.d==1)
-    this.x += 1
-
-  this.y +=1
-
-  this.draw()
+  if (this.x > width || this.y > height || this.x < 0 || this.y < 0)
+    delete Point.list[this.index]
 }
 
 Point.prototype.draw  = function () {
-  drawPixel (this.x, this.y, this.r, this.g, this.b, this.a)
+  drawPixel (Math.floor(this.x), Math.floor(this.y), this.r, this.g, this.b, this.a)
 }
 
 Point.list = []
@@ -69,10 +60,23 @@ var c   = document.getElementById("canvas")
   , ctx = c.getContext("2d")
   , width = c.width
   , height = c.height
+  , core_x = width/2
+  , core_y = height/2
   , image = ctx.getImageData(0, 0, width, height)
 
+$(window).mousemove(function(e){
+  if (e.offsetX < width) core_x = e.offsetX
+  if (e.offsetY < height) core_y = e.offsetY
+})
+
 setInterval(function() {
-  new Point(width/2, 0, 0, 0, 255, rand(255))
-  Point.list.forEach(function(thiz, i){thiz.move()})
+  new Point(core_x, core_y, 255, rand(255), rand(255), 255)
+  new Point(core_x, core_y, 255, rand(255), rand(255), 255)
+  new Point(core_x, core_y, 255, rand(255), rand(255), 255)
+  new Point(core_x, core_y, 255, rand(255), rand(255), 255)
+  new Point(core_x, core_y, 255, rand(255), rand(255), 255)
+
+  image = ctx.createImageData(width, height)
+  Point.list.forEach(function(thiz, i){thiz.move(); thiz.draw()})
   updateCanvas()
 }, 1)
