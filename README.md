@@ -1,4 +1,3 @@
-my-playground
-=============
+# my-playground
 
-stuff
+Playing with shaders using WebGL and other random stuff.
