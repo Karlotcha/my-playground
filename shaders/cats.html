@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>I love cats.</title>
+
+    <!--jQuery-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+
+    <!--css-->
+    <style type="text/css">
+      body {
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!--d3-->
+    <!-- <script type="text/javascript" src="../d3.v2.min.js" ></script> -->
+
+    <!--my scripts-->
+    <script id="2d-vertex-shader" type="x-shader/x-vertex">// <![CDATA[
+      attribute vec2 a_vertex_position;
+        void main() {
+          gl_Position = vec4(a_vertex_position, 0, 1);
+        }
+      // ]]></script>
+
+    <script id="2d-fragment-shader" type="x-shader/x-fragment">// <![CDATA[
+      void main() {
+          gl_FragColor = vec4(gl_FragCoord.x / 1000.0, gl_FragCoord.y / 1000.0, 0, 1);
+        }
+    // ]]></script>
+
+    <script type="text/javascript" src="main.js" ></script>
+
+    <canvas id="canvas" width="1000" height="1000" style="border:1px solid red;">
+    </canvas>
+  </body>
+</html>

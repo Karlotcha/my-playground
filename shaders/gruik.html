@@ -20,6 +20,23 @@
 		<!-- <script type="text/javascript" src="../d3.v2.min.js" ></script> -->
 
 		<!--my scripts-->
+		<script id="2d-vertex-shader" type="x-shader/x-vertex">// <![CDATA[
+			attribute vec3 a_vertex_position;
+
+		  uniform mat4 uMVMatrix;
+		  uniform mat4 uPMatrix;
+
+		  void main(void) {
+		    gl_Position = uPMatrix * uMVMatrix * vec4(a_vertex_position, 1.0);
+		  }
+			// ]]></script>
+
+		<script id="2d-fragment-shader" type="x-shader/x-fragment">// <![CDATA[
+			void main(void) {
+				gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+			}
+		// ]]></script>
+
 		<script type="text/javascript" src="main.js" ></script>
 
 		<canvas id="canvas" width="1000" height="1000" style="border:1px solid red;">
